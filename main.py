@@ -40,7 +40,9 @@ def InputBox(event):
             user_text += event.unicode
 
         if event.key == pygame.K_RETURN:
+            user_input = user_text
             user_text = ''
+            return user_input
 
         pygame.draw.rect(screen, 'black', input_box)
   
@@ -56,8 +58,9 @@ def InputBox(event):
 # process user input 
 def Processor(user_text):
     if user_text[0] == '/':
-        user_text[0] = 0
+        user_text = user_text.replace(user_text[0], '')
         user_text = user_text.split()
+        print(user_text)
     else:
         pass
 
@@ -76,6 +79,7 @@ while close:
                 close = False
   
         user_input = InputBox(event)
-        # Processor(user_input)
+        if user_input != None:
+            Processor(user_input)   
 
     pygame.display.update()
