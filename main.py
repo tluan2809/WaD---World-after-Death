@@ -6,8 +6,7 @@ screen = pygame.display.set_mode((1200, 800))
 pygame.display.set_caption('World after Death')
 screen.fill('lightskyblue3')
 
-# command input
-# comnnads have to be like /character name + skill
+# row of input
 input_box = pygame.draw.rect(screen, 'black', (0, 760, 1200, 40))
 user_text = ''
 base_font = pygame.font.Font(None, 32)
@@ -15,6 +14,9 @@ base_font = pygame.font.Font(None, 32)
 # fake characters
 char_1 = pygame.draw.rect(screen, 'red', (600, 300, 60, 60))
 char_2 = pygame.draw.rect(screen, 'blue', (900, 300, 60, 60))
+
+# tool bar
+tool_bar = pygame.draw.rect(screen, 'white', (150, 650, 900, 70))
 
 # create function for skills
 def Attack():
@@ -57,14 +59,15 @@ def InputBox(event):
     
 # process user input 
 def Processor(user_text):
-    user_text = user_text.split()
-    if user_text[0] == 'use':
-        pass
-    elif user_text[0] == 'equip':
-        if user_text[1] == 'weapon':
-            pass
+    if user_text[0] == '/':
+        user_text = user_text.replace(user_text[0], '')
+        user_text = user_text.split()
+        if user_text[0] == 'use':
+            print('using item')
+        elif user_text[0] == 'ew':
+            print('weapond equiped')
         else:
-            pass
+            print('skill equiped')
 
 # generate skills, player status
 skill = [Attack, Heal]
