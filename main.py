@@ -57,12 +57,14 @@ def InputBox(event):
     
 # process user input 
 def Processor(user_text):
-    if user_text[0] == '/':
-        user_text = user_text.replace(user_text[0], '')
-        user_text = user_text.split()
-        print(user_text)
-    else:
+    user_text = user_text.split()
+    if user_text[0] == 'use':
         pass
+    elif user_text[0] == 'equip':
+        if user_text[1] == 'weapon':
+            pass
+        else:
+            pass
 
 # generate skills, player status
 skill = [Attack, Heal]
