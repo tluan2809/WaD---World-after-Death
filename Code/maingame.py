@@ -1,11 +1,11 @@
 import pygame 
 import sys 
 from globals import * 
-
+from Inventory import *
 
 def main(): 
-    global Width  , Height ,Fps , Fpsclock
-    display = pygame.display.set_mode((Width , Height))
+    global Width, Height ,Fps , Fpsclock, game_screen
+    game_screen = pygame.display.set_mode((Width , Height))
     pygame.display.set_caption("WOD")
 
     while True : 

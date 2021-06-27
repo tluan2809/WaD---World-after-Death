@@ -3,8 +3,11 @@ import pygame
 import sys 
 
 
-
 Width = 800
 Height = 800
+
+inven_width = 600
+inven_height = 400
+
 Fps = 60
 Fpsclock = pygame.time.Clock()
