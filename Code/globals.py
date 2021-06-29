@@ -1,6 +1,7 @@
 #this file content the global variables that is use in maingame
 import pygame 
 import sys 
+from pygame.locals import * 
 
 
 Width = 800

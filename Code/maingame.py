@@ -1,5 +1,6 @@
 import pygame 
 import sys 
+from pygame.locals import * 
 from globals import * 
 from Inventory import *
 
@@ -9,6 +10,7 @@ def main():
     pygame.display.set_caption("WOD")
 
     while True : 
+        #normal update , let's use the fixed update  not the normal one ;)
         for event in pygame.event.get():
             if(event.type == pygame.QUIT):
                 pygame.quit()
