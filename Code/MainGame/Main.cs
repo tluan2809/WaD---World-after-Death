@@ -1,16 +1,26 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content ;
+using WaD___World_after_Death.Code.LOGIC; // thư viện logic của tôi
 
-namespace WaD___World_after_Death
+
+namespace WaD___World_after_Death.Code
 {
-    public class Game1 : Game
+    public class Main : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public Game1()
+        public Main()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -41,16 +51,18 @@ namespace WaD___World_after_Death
         }
     }
 
-
+     
+    #region JUST TO RUN THE PROGRAM , IT'S USELESS
     public static class Program
     {
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Main())
                 game.Run();
         }
     
-}
+    }
+    #endregion
 
 }
