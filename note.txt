@@ -1,8 +1,0 @@
-Lưu ý về cách viết code : 
-    -Code clean
-    -OOP nên được ưu tiên
-    -Ít biến
-    -Đặt tên biến ý nghĩa nhất có thể 
-    -Dùng cấu trúc import để làm nhiều file cùng 1 lúc
-    -Ủng hộ việc dùng nhiều file
-     
