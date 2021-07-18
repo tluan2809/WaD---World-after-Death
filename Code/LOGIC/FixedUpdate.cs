@@ -16,7 +16,7 @@ namespace WaD___World_after_Death.Code.LOGIC
 {
     public class FixedUpdate
     {
-        public static float FixedUpdateDelta = (int)(1000 / (float)30);
+        public static float FixedUpdateDelta = (int)(1000 / (float)60);
     
         public static float previousT = 0;
         public static float accumulator = 0.0f;

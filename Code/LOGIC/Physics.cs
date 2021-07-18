@@ -31,11 +31,6 @@ namespace WaD___World_after_Death.Code.LOGIC
         {
             this.position = position;
         }
-
-        public virtual void Update(GameTime gameTime)
-        {
-
-        }
         
     }
 }

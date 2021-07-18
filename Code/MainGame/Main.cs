@@ -30,7 +30,7 @@ namespace WaD___World_after_Death.Code
         public void LoadPlayer()
         {
             skin = "Assets/Player/male_character";
-            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin );
+            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin , settings.Width , settings.Height );
         }
         #endregion
         
@@ -84,7 +84,7 @@ namespace WaD___World_after_Death.Code
 
         protected override void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
+            player.Update(gameTime , _spriteBatch , _graphics);
             if(FixedUpdate.previousT == 0)
             {
                 FixedUpdate.previousT =(float) gameTime.TotalGameTime.TotalMilliseconds;

@@ -181,11 +181,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Code\\Bro's project\\WaD---World-after-Death\\WaD---World-after-Death.csproj",
+      "projectUniqueName": "D:\\Code\\Bro's project\\WaD---World-after-Death\\WaD---World-after-Death.csproj",
       "projectName": "WaD---World-after-Death",
-      "projectPath": "d:\\Code\\Bro's project\\WaD---World-after-Death\\WaD---World-after-Death.csproj",
+      "projectPath": "D:\\Code\\Bro's project\\WaD---World-after-Death\\WaD---World-after-Death.csproj",
       "packagesPath": "C:\\Users\\ryze1\\.nuget\\packages\\",
-      "outputPath": "d:\\Code\\Bro's project\\WaD---World-after-Death\\obj\\",
+      "outputPath": "D:\\Code\\Bro's project\\WaD---World-after-Death\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
