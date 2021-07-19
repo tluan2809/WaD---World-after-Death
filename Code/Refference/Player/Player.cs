@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content ;
 using WaD___World_after_Death.Code.LOGIC; // thư viện logic của tôi
+//using WaD___World_after_Death.Code;
 
 namespace WaD___World_after_Death.Code
 {
@@ -26,6 +27,8 @@ namespace WaD___World_after_Death.Code
         
 
         private float friction = 0.9f;
+
+        private bool Is_Pressed = false;
 
         private Texture2D texture;
         
@@ -48,44 +51,64 @@ namespace WaD___World_after_Death.Code
                 Velocity.X += speed;
             }
         }
+          
+        #region ChangeMouse
+        
+        public bool GetMouseState()
+        {
+            return Inventory.IsOpen;
+        }
 
+        #endregion
 
         private void IsOpeningInventory()
         {
-            if(Keyboard.GetState().IsKeyDown(Input.OPENINVENTORY))
+            
+            if(Keyboard.GetState().IsKeyDown(Input.OPENINVENTORY) && !Is_Pressed)
             {
                 if(Inventory.IsOpen == true)
                 {
                     Inventory.IsOpen = false;
+                    
                 }else
                 {
                     Inventory.IsOpen = true;
-                }
+                };
+                Is_Pressed = true;
+            }
+            if(Keyboard.GetState().IsKeyUp(Input.OPENINVENTORY) && Is_Pressed)
+            {
+                Is_Pressed = false;
             }
             if(Keyboard.GetState().IsKeyDown(Keys.Escape) && Inventory.IsOpen == true)
             {
                 Inventory.IsOpen = false;
+                Is_Pressed = false;
             }
         }
 
-        public Player(Vector2 position , string texture ,int width , int height )  : base(position)
+        public Player(Vector2 position , string texture ,int width , int height , GraphicsDeviceManager _graphics  )  : base(position)
         {
             this.position = position;
             this.skin = texture;
-            Inventory = new InventoryBoard(width, height);
+            Inventory = new InventoryBoard(width, height , _graphics);
         }
-        public virtual void Update(GameTime gameTime ,  SpriteBatch _spritebatch , GraphicsDeviceManager _graphics) // fixed
+
+        public virtual void Update(GameTime gameTime, SpriteBatch _spriteBatch,GraphicsDeviceManager _graphics)
+        {
+            IsOpeningInventory();
+            
+        }
+
+
+        public virtual void PhysicUpdate(GameTime gameTime ) // fixed
         {
             this.oldPosition = position;
             Move();
             position += Velocity;
             Velocity *= friction;
-            IsOpeningInventory();
 
-            if(Inventory.IsOpen == true)
-            {
-                Inventory.Open(_spritebatch, _graphics);
-            }
+            
 
         }
 
@@ -94,11 +117,17 @@ namespace WaD___World_after_Death.Code
             this.texture = content.Load<Texture2D>(skin);
         }
 
-        public virtual void Draw(SpriteBatch _spriteBatch)
+        public virtual void Draw(SpriteBatch _spriteBatch , GraphicsDeviceManager _graphics)
         {
             _spriteBatch.Begin();
-            _spriteBatch.Draw(this.texture , position , Color.White);
+            Vector2 Draw_POS = Vector2.Lerp(oldPosition, position , FixedUpdate.ALPHA);
+            _spriteBatch.Draw(this.texture , Draw_POS , Color.White);
+
+            
             _spriteBatch.End();
+
+            Inventory.Open(_spriteBatch, _graphics);
+            
         }
     } 
 }

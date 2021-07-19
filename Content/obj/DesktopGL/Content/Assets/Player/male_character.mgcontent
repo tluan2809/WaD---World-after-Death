@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>d:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png</SourceFile>
+  <SourceFile>D:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png</SourceFile>
   <SourceTime>2021-07-18T16:20:20.7143834+07:00</SourceTime>
-  <DestFile>d:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Assets/Player/male_character.xnb</DestFile>
-  <DestTime>2021-07-19T00:53:23.4645078+07:00</DestTime>
+  <DestFile>D:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Assets/Player/male_character.xnb</DestFile>
+  <DestTime>2021-07-19T10:34:50.2319003+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T23:17:54+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

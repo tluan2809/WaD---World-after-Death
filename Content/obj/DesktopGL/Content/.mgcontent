@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>d:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png</File>
+    <File>D:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

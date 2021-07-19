@@ -30,7 +30,7 @@ namespace WaD___World_after_Death.Code
         public void LoadPlayer()
         {
             skin = "Assets/Player/male_character";
-            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin , settings.Width , settings.Height );
+            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin , settings.Width , settings.Height , _graphics );
         }
         #endregion
         
@@ -43,7 +43,7 @@ namespace WaD___World_after_Death.Code
             int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             settings = new Settings(width, height);
-            LoadPlayer();
+            
         }
 
         private void LoadSettings()
@@ -59,20 +59,38 @@ namespace WaD___World_after_Death.Code
 
         #endregion
 
+        #region MouseSettings
+
+        bool oldChange = false;
+        bool newChange = false;
+
+        private void ChangeMouse()
+        {
+            newChange = player.GetMouseState();
+            if(oldChange != newChange)
+            {
+                this.IsMouseVisible = newChange;
+                oldChange = newChange;
+            }
+        }
+
+        #endregion
 
 
         public Main()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            GameStart();
+            IsMouseVisible = false;
+            
+            
         }
 
         protected override void Initialize()
         {
-
+            GameStart();
             LoadSettings();
+            LoadPlayer();
             base.Initialize();
         }
 
@@ -103,11 +121,12 @@ namespace WaD___World_after_Death.Code
 
             while(FixedUpdate.accumulator >=FixedUpdate.FixedUpdateDelta )
             {
+                player.PhysicUpdate(gameTime);
                 FixedUpdate.accumulator -=FixedUpdate.FixedUpdateDelta;
             }
 
             FixedUpdate.ALPHA = (FixedUpdate.accumulator/FixedUpdate.FixedUpdateDelta);
-            
+            ChangeMouse();
             
             base.Update(gameTime);
         }
@@ -116,7 +135,7 @@ namespace WaD___World_after_Death.Code
         {
             GraphicsDevice.Clear(Color.Black);
 
-            player.Draw(_spriteBatch);
+            player.Draw(_spriteBatch , _graphics);
 
 
             base.Draw(gameTime);
