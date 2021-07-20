@@ -25,6 +25,5 @@ namespace WaD___World_after_Death.Code.setting
             this.Width = width;
             this.Height = height;
         }
-
     }
 }
