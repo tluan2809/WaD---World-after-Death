@@ -91,7 +91,7 @@ namespace WaD___World_after_Death.Code
         {
             this.position = position;
             this.skin = texture;
-            Inventory = new InventoryBoard(width, height , _graphics);
+            Inventory = new InventoryBoard(width, height , _graphics , this);
         }
 
         public virtual void Update(GameTime gameTime, SpriteBatch _spriteBatch,GraphicsDeviceManager _graphics)
@@ -128,6 +128,11 @@ namespace WaD___World_after_Death.Code
 
             Inventory.Open(_spriteBatch, _graphics);
             
+        }
+
+        public virtual void Draw(SpriteBatch _spriteBatch  , int size_x , int size_y , int Draw_x , int Draw_y)
+        {
+            _spriteBatch.Draw(this.texture , new Rectangle((int)Draw_x , (int)Draw_y , size_x , size_y) , Color.White);
         }
     } 
 }
