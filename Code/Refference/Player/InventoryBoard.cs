@@ -136,6 +136,20 @@ namespace WaD___World_after_Death.Code
             rect.SetData(data);
             return rect;
         }
+        public static Texture2D CreateRectangle(int size_x , int size_y , GraphicsDeviceManager _graphics , Color COLOR)
+        {
+            Texture2D rect = new Texture2D(_graphics.GraphicsDevice , size_x , size_y);
+            Color[] data = new Color[size_x * size_y];
+            for(int i = 0 ; i < size_y ; i++)
+            {
+                for(int j = 0 ; j <  size_x ; j++)
+                {
+                    data[size_x *  i  + j ] = COLOR;
+                }
+            }
+            rect.SetData(data);
+            return rect;
+        }
     }
 
     #region StepBrother  
@@ -283,6 +297,7 @@ namespace WaD___World_after_Death.Code
         public int Width;
 
         public int Height;
+        //private Texture2D Rect ;
         public Inventory(int Width , int Height ,int Edgesize, int size_y ,GraphicsDeviceManager _graphics)
         {
             this.size_y = size_y;
@@ -306,6 +321,7 @@ namespace WaD___World_after_Death.Code
 
             int pre_end_x = x  ;
             int pre_end_y = y;
+            //Rect = SQUARE.CreateRectangle(StuffSize_x , Edgesize , _graphics ,new Color(16,47,136));
             for(int temp_y = 0 ;  temp_y < 6 ; temp_y++)
             {
                 pre_end_x  = x;
@@ -399,7 +415,7 @@ namespace WaD___World_after_Death.Code
     public class PLAYERDEMO 
     {
         private int RightAngle;
-        private int Edgesize;
+        public int Edgesize;
 
         private Texture2D HeavyGrey; 
 
@@ -553,7 +569,7 @@ namespace WaD___World_after_Death.Code
     
     #region InventoryStuff 
     
-   public class Stuff
+    public class Stuff
     {
         public int Draw_x;
         public int Draw_y ;
@@ -567,11 +583,13 @@ namespace WaD___World_after_Death.Code
         
         private Color COLOR = new Color(130 , 85 , 0 , 255) ;
 
-        private Color EdgeColor  = new Color(255,255,255,255);
+        private Color EdgeColor  = new Color(16,47,136,255);
         
         public virtual void Draw(SpriteBatch _spriteBatch)
         {
             _spriteBatch.Draw(this.Shape, new Vector2(Draw_x, Draw_y) , Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, End_y) , Color.White);
+            _spriteBatch.Draw(this.CanhNgan , new Vector2(End_x, Draw_y) , Color.White);
         }
         
         public int size_x ;
@@ -580,31 +598,330 @@ namespace WaD___World_after_Death.Code
 
         public int Edgesize;
 
+        private Texture2D CanhDai;
+        private Texture2D CanhNgan;
         public Stuff(int x , int y  , int size_x , int size_y, GraphicsDeviceManager _graphics )
         {
             Draw_x = x;
             Draw_y = y ;
-            this.Edgesize = (int)size_x/ 100;
+            this.Edgesize = (int)size_x/ 50;
             this.size_x = size_x;
             this.size_y = size_y;
             this.End_x = Draw_x + size_x    ;
             this.End_y = Draw_y + size_y   ;
-            
+
+            CanhDai = SQUARE.CreateRectangle(size_x , Edgesize , _graphics , EdgeColor);
+            CanhNgan = SQUARE.CreateRectangle(Edgesize , size_y , _graphics , EdgeColor);
             this.Shape   = SQUARE.CreateStuffBoard(size_x , size_y,  this.Edgesize, _graphics , EdgeColor,COLOR);
         }
+
+        public virtual void Update(SpriteBatch _spriteBatch)
+        {
+
+        }
+
+
     }
-    
-
-
- 
-    
-    
-    
 
 
 
+
+
+    #endregion
+
+    #region HP
+
+    public class Health
+    {
+        public int Draw_x;
+
+        public int Draw_y;
+
+        public int End_x;
+
+        public int End_y;
+
+        public int size_x;
+
+        public int size_y;
+
+        public int Space_Size;
+
+        private Texture2D Shape;
+
+        private Texture2D CanhDai;
+
+        private Texture2D CanhNgan;
+        public virtual void Update(GameTime gameTime)
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch _spriteBatch)
+        {
+            _spriteBatch.Draw(this.Shape, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, End_y), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2(End_x - size_x / 50, Draw_y), Color.White);
+
+        }
+
+        public Health(int MaxWidth, int MaxHeight, int MinWidth, int MinHeight, Color color, GraphicsDeviceManager _graphics)
+        {
+            size_x = (MaxWidth - MinWidth) - (MaxWidth - MinWidth) / 5;
+            size_y = (MaxHeight - MinHeight) / 10;
+            int mid = MinWidth + (MaxWidth - MinWidth) / 2;
+            this.Draw_x = mid - size_x / 2;
+            this.Space_Size = (MaxHeight - MinHeight) / 10;
+            this.Draw_y = MinHeight + Space_Size;
+
+            this.End_x = Draw_x + size_x;
+            this.End_y = Draw_y + size_y;
+            this.Shape = SQUARE.CreateRectangle(size_x, size_y, _graphics, color);
+            this.CanhNgan = SQUARE.CreateRectangle(size_x / 50, size_y, _graphics, Color.Black);
+            this.CanhDai = SQUARE.CreateRectangle(size_x, size_x / 50, _graphics, Color.Black);
+        }
+    }
+
+
+    #endregion
+
+    #region Stamina
+
+    public class Stamina
+    {
+        public int size_x;
+
+        public int size_y;
+
+        public int Draw_x;
+
+        public int Draw_y;
+
+        public int End_x;
+
+        public int End_y;
+
+        protected Texture2D Shape;
+
+        protected Texture2D CanhDai;
+
+        protected Texture2D CanhNgan;
+
+        public virtual void Update(GameTime gameTime)
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch _spriteBatch)
+        {
+
+            _spriteBatch.Draw(this.Shape, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, End_y), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2(Draw_x, Draw_y), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2(End_x - size_x / 50, Draw_y), Color.White);
+
+
+        }
+
+        public Stamina(int size_x, int size_y, int Draw_x, int Draw_y, GraphicsDeviceManager _graphics) // Không kế thừa class HP vì class HP có cái init phiền phức vcl ra
+        {
+            this.size_x = size_x;
+            this.size_y = size_y;
+            this.Draw_x = Draw_x;
+            this.Draw_y = Draw_y;
+            this.End_x = Draw_x + size_x;
+            this.End_y = Draw_y + size_y;
+            this.Shape = SQUARE.CreateRectangle(size_x, size_y, _graphics, Color.BlueViolet);
+            this.CanhNgan = SQUARE.CreateRectangle(size_x / 50, size_y, _graphics, Color.Black);
+            this.CanhDai = SQUARE.CreateRectangle(size_x, size_x / 50, _graphics, Color.Black);
+
+        }
+    }
+
+    #endregion
+
+    #region ArmorBar
+
+    public class ArmorBar : Stamina
+    {
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
+        public ArmorBar(int size_x, int size_y, int Draw_x, int Draw_y, GraphicsDeviceManager _graphics) : base(size_x, size_y, Draw_x, Draw_y, _graphics)
+        {
+            this.size_x = size_x;
+            this.size_y = size_y;
+            this.Draw_x = Draw_x;
+            this.Draw_y = Draw_y;
+            this.End_x = Draw_x + size_x;
+            this.End_y = Draw_y + size_y;
+            this.Shape = SQUARE.CreateRectangle(size_x, size_y, _graphics, new Color(255, 255, 255));
+            this.CanhNgan = SQUARE.CreateRectangle(size_x / 50, size_y, _graphics, Color.Black);
+            this.CanhDai = SQUARE.CreateRectangle(size_x, size_x / 50, _graphics, Color.Black);
+        }
+    }
+
+
+    #endregion
+
+    #region Foodbar
     
-    #endregion 
+    public class FoodBar : Stamina
+    {
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+        public FoodBar(int size_x, int size_y, int Draw_x, int Draw_y, GraphicsDeviceManager _graphics) : base(size_x, size_y, Draw_x, Draw_y, _graphics)
+        {
+            this.size_x = size_x;
+            this.size_y = size_y;
+            this.Draw_x = Draw_x;
+            this.Draw_y = Draw_y;
+            this.End_x = Draw_x + size_x;
+            this.End_y = Draw_y + size_y;
+            this.Shape = SQUARE.CreateRectangle(size_x, size_y, _graphics, Color.YellowGreen);
+            this.CanhNgan = SQUARE.CreateRectangle(size_x / 50, size_y, _graphics, Color.Black);
+            this.CanhDai = SQUARE.CreateRectangle(size_x, size_x / 50, _graphics, Color.Black);
+        }
+    }
+
+    #endregion
+
+
+    #region Weapons
+
+
+    public class Weapons
+    {
+        public Texture2D Shape;
+
+        public int Draw_x;
+
+        public int Draw_y;
+
+        public int  End_x;
+
+        public int End_y;
+
+        public int size;
+    }
+    public class WeaponCase
+    {  
+        
+        public Weapons weapon_1 = new Weapons();
+        public Weapons weapon_2 = new Weapons();
+        
+
+        public virtual void Draw(SpriteBatch _spriteBatch)
+        {
+            _spriteBatch.Draw(weapon_1.Shape, new Vector2(weapon_1.Draw_x, weapon_1.Draw_y) , Color.White);
+            _spriteBatch.Draw(weapon_2.Shape, new Vector2(weapon_2.Draw_x, weapon_2.Draw_y) , Color.White);
+        }
+        public WeaponCase(int MinWidth,int MinHeight ,int MaxWidth, int MaxHeight , GraphicsDeviceManager _graphics)
+        {
+            weapon_1.Draw_y = MinHeight;
+            weapon_1.size = (MaxWidth - MinWidth) - (MaxWidth - MinWidth) / 3;
+            int mid = MinWidth  + (MaxWidth - MinWidth)/2;
+            weapon_1.Draw_x = mid - weapon_1.size/2 ;
+            weapon_1.End_x = weapon_1.Draw_x + weapon_1.size;
+            weapon_1.End_y = weapon_1.Draw_y + weapon_1.size;
+            weapon_1.Shape = SQUARE.CreateStuffBoard(weapon_1.size , weapon_1.size , weapon_1.size/25  , _graphics  , Color.Black , new Color(77,77,77,255));
+            weapon_2.Shape = SQUARE.CreateStuffBoard(weapon_1.size , weapon_1.size , weapon_1.size/25  , _graphics  , Color.Black , new Color(77,77,77,255));
+            mid = MinHeight + (MaxHeight - MinHeight)/2;
+
+            weapon_2.Draw_x = weapon_1.Draw_x;
+            weapon_2.size = weapon_1.size;
+            weapon_2.End_x = weapon_2.Draw_x + weapon_2.size;
+
+            weapon_2.Draw_y =mid+ ( mid - weapon_1.End_y);
+            weapon_2.End_y = weapon_2.Draw_y + weapon_2.size;
+        }
+    }
+
+
+    #endregion
+
+
+    #region ARMORWearing 
+    //tách làm 2 class
+    public class armorwearing
+    {
+        public int Draw_x;
+        public int Draw_y ;
+
+        public int End_x;
+
+        public int End_y;
+
+        public Texture2D Shape;
+
+        public virtual void Draw(SpriteBatch _spriteBatch)
+        {
+            _spriteBatch.Draw(this.Shape , new Vector2(Draw_x, Draw_y) , Color.White);
+        }
+    } 
+
+    public class Helmet : armorwearing
+    {
+        // thành lập 1 số hàm trong này cái này về logic nên tôi sẽ lo nó
+    }
+
+    public class BuffStuff : armorwearing
+    {
+        // vật phẩm bổ trợ 
+    }
+
+    public class SetUpArmor
+    {
+        public armorwearing armor = new armorwearing();
+        
+        public BuffStuff buff = new BuffStuff();
+
+        public Helmet helmet = new Helmet();
+        public virtual void Draw(SpriteBatch _spriteBatch)
+        {
+            armor.Draw(_spriteBatch);
+            buff.Draw(_spriteBatch);
+            helmet.Draw(_spriteBatch);
+        }
+        public SetUpArmor(int size,int space,int MaxWidth  , int MinWidth  , int MinHeight , GraphicsDeviceManager _graphics)
+        {
+            helmet.Draw_y = MinHeight;
+            helmet.End_y = helmet.Draw_y + size;
+            int mid = MinWidth + (MaxWidth - MinWidth)/2;
+            helmet.Draw_x = mid - size/2;
+            helmet.End_x = helmet.Draw_x + size;
+            
+            helmet.Shape = SQUARE.CreateStuffBoard(size , size , size/25  , _graphics  , Color.Black , new Color(77,77,77,255));
+            armor.Shape = SQUARE.CreateStuffBoard(size , size , size/25  , _graphics  , Color.Black , new Color(77,77,77,255));
+            buff.Shape = SQUARE.CreateStuffBoard(size , size , size/25  , _graphics  , Color.Black , new Color(77,77,77,255));
+            
+            armor.Draw_x = helmet.Draw_x;
+            armor.Draw_y = helmet.End_y + space;
+            armor.End_x = armor.Draw_x + size;
+            armor.End_y = armor.Draw_y + size;
+
+            
+            buff.Draw_x = armor.Draw_x;
+            buff.Draw_y = armor.End_y + space;
+            buff.End_x = buff.Draw_x + size;
+            buff.End_y = buff.Draw_y + size;
+
+
+
+        }
+    }
+
+
+
+    #endregion
+
     public class InventoryBoard
     {
         private MAINRECTANGLE MainBoard;
@@ -617,13 +934,31 @@ namespace WaD___World_after_Death.Code
 
         public  bool IsOpen = false;
         
-        
+        private Health HP ;       
+
+        private ArmorBar Armor;
+
+        private Stamina stamina; 
+
+        private FoodBar Food;
+
+        private WeaponCase weaponcase;
+
+        private SetUpArmor Wearing;
         
         public InventoryBoard(int Width , int Height, GraphicsDeviceManager _graphics , Player player)
         {
             ChangeSettings(Width , Height , _graphics , player);
         }
 
+        
+        public virtual void Update(GameTime gameTime)
+        {
+            HP.Update(gameTime);
+            stamina.Update(gameTime);
+            Armor.Update(gameTime);
+            
+        }
 
         public virtual void  Open(SpriteBatch  _spriteBatch , GraphicsDeviceManager _graphics) 
         {
@@ -635,6 +970,14 @@ namespace WaD___World_after_Death.Code
             StepSister.Draw(_spriteBatch);
             INVENTORY.Draw(_spriteBatch);
             PlayerDemo.Draw(_spriteBatch);
+            HP.Draw(_spriteBatch);
+            stamina.Draw(_spriteBatch);
+            Armor.Draw(_spriteBatch);
+            Food.Draw(_spriteBatch);
+            weaponcase.Draw(_spriteBatch);
+
+            Wearing.Draw(_spriteBatch);
+
             _spriteBatch.End();
             
         }
@@ -645,6 +988,14 @@ namespace WaD___World_after_Death.Code
             StepSister = new STEPMAINBOARD(MainBoard.Draw_x , MainBoard.Draw_y , MainBoard.End_x , MainBoard.End_y , _graphics);
             INVENTORY = new Inventory(StepSister.End_x , StepSister.End_y , StepSister.Edgesize ,(StepSister.End_y - StepSister.Edgesize *2) - (StepSister.Draw_y + StepSister.Edgesize*2), _graphics);
             PlayerDemo = new PLAYERDEMO(Width, StepSister.Edgesize  , Height ,player , StepSister.Draw_x  , StepSister.Draw_y , INVENTORY.Draw_x , INVENTORY.Draw_y , _graphics);
+            HP = new Health(INVENTORY.Draw_x ,StepSister.End_y , StepSister.Draw_x + StepSister.Edgesize ,PlayerDemo.End_y + PlayerDemo.Edgesize  ,Color.Red , _graphics) ;
+            stamina = new Stamina(HP.size_x , HP.size_y , HP.Draw_x , HP.End_y + HP.Space_Size , _graphics);
+            Armor = new ArmorBar(stamina.size_x ,stamina.size_y , stamina.Draw_x , stamina.End_y + HP.Space_Size , _graphics);
+            Food = new FoodBar(stamina.size_x , stamina.size_y ,stamina.Draw_x , Armor.End_y + HP.Space_Size , _graphics);
+            weaponcase = new WeaponCase(StepSister.Draw_x + StepSister.Edgesize , PlayerDemo.Draw_y ,PlayerDemo.Draw_x , PlayerDemo.End_y , _graphics );
+            int space =(weaponcase.weapon_2.Draw_y -  weaponcase.weapon_1.End_y)/3;
+            int MinHeight =(StepSister.Draw_y + StepSister.Edgesize) +  (PlayerDemo.Draw_y - StepSister.Draw_y - StepSister.Edgesize)/2 + (PlayerDemo.Draw_y - StepSister.Draw_y - StepSister.Edgesize)/5;
+            Wearing = new SetUpArmor(weaponcase.weapon_1.size , space , INVENTORY.Draw_x , PlayerDemo.End_x , MinHeight, _graphics );
         }
     }
 }
