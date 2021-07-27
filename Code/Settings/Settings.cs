@@ -16,10 +16,10 @@ namespace WaD___World_after_Death.Code.setting
 {
     public  class Settings
     {
-        public int Width ;
-        public int Height ;
+        public  int Width ;
+        public  int Height ;
 
-        public bool FullScreen = true;
+        public  bool FullScreen = true;
         public Settings(int width, int height)
         {
             this.Width = width;

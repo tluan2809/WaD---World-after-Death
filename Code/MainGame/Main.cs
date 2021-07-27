@@ -30,7 +30,7 @@ namespace WaD___World_after_Death.Code
         public void LoadPlayer()
         {
             skin = "Assets/Player/male_character";
-            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin , settings.Width , settings.Height , _graphics );
+            player = new Player(new Vector2(settings.Width / 2, settings.Height / 2), skin , settings.Width , settings.Height , _graphics , settings );
         }
         #endregion
         
@@ -136,8 +136,6 @@ namespace WaD___World_after_Death.Code
             GraphicsDevice.Clear(Color.Black);
 
             player.Draw(_spriteBatch , _graphics);
-
-
             base.Draw(gameTime);
         }
     }

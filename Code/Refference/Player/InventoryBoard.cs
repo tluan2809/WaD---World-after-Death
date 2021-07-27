@@ -703,21 +703,77 @@ namespace WaD___World_after_Death.Code
 
         public int End_y;
 
+        public int Capacity = 100; // 100 %
+        private int speed = 2;
+
+        private int ChargeSpeed = 1;
+        
+
+
+
         protected Texture2D Shape;
 
         protected Texture2D CanhDai;
 
         protected Texture2D CanhNgan;
 
-        public virtual void Update(GameTime gameTime)
+        
+        public virtual void Run()
         {
+            
+            Capacity -= speed;
 
+            if(Capacity <= 0 )
+            {
+
+                Capacity = 0;
+                return  ;
+            }
+ 
+        }
+
+        public virtual void Calm()
+        {
+            if(Capacity >= 100)
+            {
+                Capacity = 100;
+                return ; 
+            }
+            Capacity += ChargeSpeed;
+        }
+
+        public virtual void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
+        {
+            if(Capacity <= 0 )
+            {
+                Shape = null;
+                return ;  
+            }
+            Shape = SQUARE.CreateRectangle(size_x * Capacity/100  , size_y , _graphics , Color.BlueViolet);
+        }
+
+
+        public virtual void SpecialDraw(SpriteBatch _spriteBatch ,int Screen_Width , int Screen_Height)
+        {
+            int x = Screen_Width - size_x;
+            _spriteBatch.Begin();
+
+
+            if(Shape != null)
+                _spriteBatch.Draw(this.Shape, new Vector2(x, 0), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(x, 0), Color.White);
+            _spriteBatch.Draw(this.CanhDai, new Vector2(x, size_y), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2(x, 0), Color.White);
+            _spriteBatch.Draw(this.CanhNgan, new Vector2( Screen_Width - size_x/50 , 0), Color.White);
+        
+            _spriteBatch.End();
+        
         }
 
         public virtual void Draw(SpriteBatch _spriteBatch)
         {
-
-            _spriteBatch.Draw(this.Shape, new Vector2(Draw_x, Draw_y), Color.White);
+            if(Shape != null)
+                _spriteBatch.Draw(this.Shape, new Vector2(Draw_x, Draw_y), Color.White);
             _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, Draw_y), Color.White);
             _spriteBatch.Draw(this.CanhDai, new Vector2(Draw_x, End_y), Color.White);
             _spriteBatch.Draw(this.CanhNgan, new Vector2(Draw_x, Draw_y), Color.White);
@@ -737,7 +793,6 @@ namespace WaD___World_after_Death.Code
             this.Shape = SQUARE.CreateRectangle(size_x, size_y, _graphics, Color.BlueViolet);
             this.CanhNgan = SQUARE.CreateRectangle(size_x / 50, size_y, _graphics, Color.Black);
             this.CanhDai = SQUARE.CreateRectangle(size_x, size_x / 50, _graphics, Color.Black);
-
         }
     }
 
@@ -747,7 +802,7 @@ namespace WaD___World_after_Death.Code
 
     public class ArmorBar : Stamina
     {
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime ,GraphicsDeviceManager _graphics)
         {
 
         }
@@ -773,7 +828,7 @@ namespace WaD___World_after_Death.Code
     
     public class FoodBar : Stamina
     {
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime , GraphicsDeviceManager _graphics)
         {
 
         }
@@ -934,17 +989,17 @@ namespace WaD___World_after_Death.Code
 
         public  bool IsOpen = false;
         
-        private Health HP ;       
+        public Health HP ;       
 
-        private ArmorBar Armor;
+        public ArmorBar Armor;
 
-        private Stamina stamina; 
+        public Stamina stamina; 
 
-        private FoodBar Food;
+        public FoodBar Food;
 
-        private WeaponCase weaponcase;
+        public WeaponCase weaponcase;
 
-        private SetUpArmor Wearing;
+        public SetUpArmor Wearing;
         
         public InventoryBoard(int Width , int Height, GraphicsDeviceManager _graphics , Player player)
         {
@@ -952,12 +1007,12 @@ namespace WaD___World_after_Death.Code
         }
 
         
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime , GraphicsDeviceManager _graphics)
         {
             HP.Update(gameTime);
-            stamina.Update(gameTime);
-            Armor.Update(gameTime);
-            
+            stamina.Update(gameTime , _graphics);
+            Armor.Update(gameTime , _graphics);
+            Food.Update(gameTime , _graphics);
         }
 
         public virtual void  Open(SpriteBatch  _spriteBatch , GraphicsDeviceManager _graphics) 
@@ -981,7 +1036,6 @@ namespace WaD___World_after_Death.Code
             _spriteBatch.End();
             
         }
-
         public void ChangeSettings(int Width, int Height , GraphicsDeviceManager _graphics , Player player)
         {
             MainBoard = new MAINRECTANGLE(Width , Height , _graphics);

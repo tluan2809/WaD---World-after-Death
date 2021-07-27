@@ -37,6 +37,8 @@ namespace WaD___World_after_Death.Code.LOGIC
         public static Keys Sub_Down = Keys.Down;
 
         public static Keys OPENINVENTORY  = Keys.E;
+
+        public static Keys Run = Keys.LeftShift;
     
     }
 }

@@ -23,3 +23,5 @@ D:\Code\Bro's project\WaD---World-after-Death\obj\Debug\netcoreapp3.1\WaD---Worl
 D:\Code\Bro's project\WaD---World-after-Death\obj\Debug\netcoreapp3.1\WaD---World-after-Death.genruntimeconfig.cache
 D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Player\male_character.xnb
 D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Player\male_character_-.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Font\Character.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Font\File.xnb
