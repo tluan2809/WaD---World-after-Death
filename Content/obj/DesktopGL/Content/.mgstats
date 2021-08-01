@@ -1,3 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png","D:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Assets/Player/male_character.xnb","TextureProcessor","Texture2DContent",5106,409685,0.1696189
-"D:/Code/Bro's project/WaD---World-after-Death/Content/Font/File.spritefont","D:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Font/File.xnb","FontDescriptionProcessor","SpriteFontContent",2008,70690,0.1234765
+"d:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Menu/Menu/menu.png","d:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Assets/Menu/Menu/menu.xnb","TextureProcessor","Texture2DContent",125473,2000085,0.2926906
+"d:/Code/Bro's project/WaD---World-after-Death/Content/Assets/Player/male_character.png","d:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Assets/Player/male_character.xnb","TextureProcessor","Texture2DContent",5106,409685,0.0184949
+"d:/Code/Bro's project/WaD---World-after-Death/Content/Font/File.spritefont","d:/Code/Bro's project/WaD---World-after-Death/Content/bin/DesktopGL/Content/Font/File.xnb","FontDescriptionProcessor","SpriteFontContent",2008,70690,0.1389464

@@ -39,6 +39,7 @@ namespace WaD___World_after_Death.Code.LOGIC
         public static Keys OPENINVENTORY  = Keys.E;
 
         public static Keys Run = Keys.LeftShift;
-    
+
+        public static Keys OpenSettings = Keys.Escape;
     }
 }

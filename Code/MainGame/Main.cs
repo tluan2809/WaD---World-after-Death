@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content ;
 using WaD___World_after_Death.Code.LOGIC; // thư viện logic của tôi
 using WaD___World_after_Death.Code.setting;
+using WaD___World_after_Death.Code.Menu;
 
 
 namespace WaD___World_after_Death.Code
@@ -21,6 +22,8 @@ namespace WaD___World_after_Death.Code
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Settings settings; 
+
+        public MainMenu Menu ;
         
         
         
@@ -43,6 +46,7 @@ namespace WaD___World_after_Death.Code
             int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             settings = new Settings(width, height);
+            Menu = new MainMenu(settings.Width , settings.Height ,this.Content);
             
         }
 
@@ -67,6 +71,13 @@ namespace WaD___World_after_Death.Code
         private void ChangeMouse()
         {
             newChange = player.GetMouseState();
+            
+            if(oldChange != newChange)
+            {
+                this.IsMouseVisible = newChange;
+                oldChange = newChange;
+            }
+            newChange = Menu.GetMouseState();
             if(oldChange != newChange)
             {
                 this.IsMouseVisible = newChange;
@@ -103,6 +114,7 @@ namespace WaD___World_after_Death.Code
         protected override void Update(GameTime gameTime)
         {
             player.Update(gameTime , _spriteBatch , _graphics);
+            Menu.Update(gameTime);
             if(FixedUpdate.previousT == 0)
             {
                 FixedUpdate.previousT =(float) gameTime.TotalGameTime.TotalMilliseconds;
@@ -136,6 +148,7 @@ namespace WaD___World_after_Death.Code
             GraphicsDevice.Clear(Color.Black);
 
             player.Draw(_spriteBatch , _graphics);
+            Menu.Draw(_spriteBatch);
             base.Draw(gameTime);
         }
     }

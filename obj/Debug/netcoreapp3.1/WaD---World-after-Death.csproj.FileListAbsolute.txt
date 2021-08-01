@@ -25,3 +25,11 @@ D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\As
 D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Player\male_character_-.xnb
 D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Font\Character.xnb
 D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Font\File.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\control.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\game.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\graphics.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\menu.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\quit.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\resume.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\settings.xnb
+D:\Code\Bro's project\WaD---World-after-Death\bin\Debug\netcoreapp3.1\Content\Assets\Menu\Menu\sound.xnb
